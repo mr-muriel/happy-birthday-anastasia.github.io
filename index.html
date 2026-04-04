@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>С днём рождения, Анастасия 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#a8d8ea;--sky-light:#d6eef8;--sky-deep:#5ba3c9;--sky-dark:#2d6e8e;
+  --rose:#f4b8c8;--rose-light:#fce4ec;--rose-deep:#e8829a;
+  --white:#fdfcff;--text:#2a3a4a;--text-light:#5a7a8a;
+  --green:#34c78a;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',serif;background:var(--white);color:var(--text);overflow-x:hidden}
+
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;opacity:0;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.6}90%{opacity:.3}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+
+/* TIMER */
+#timer-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(160deg,#e8f6fd 0%,#f5e8f0 50%,#daeef9 100%);z-index:1}
+.timer-bg-circle{position:absolute;border-radius:50%;animation:pulse 4s ease-in-out infinite}
+.timer-bg-circle:nth-child(1){width:600px;height:600px;top:-100px;left:-100px;background:radial-gradient(circle,rgba(168,216,234,.3) 0%,transparent 70%)}
+.timer-bg-circle:nth-child(2){width:400px;height:400px;bottom:-50px;right:-50px;animation-delay:2s;background:radial-gradient(circle,rgba(244,184,200,.3) 0%,transparent 70%)}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+.name-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,7rem);font-weight:700;text-align:center;line-height:1;margin-bottom:1rem;opacity:0;animation:fadeIn 1s ease .6s forwards;background:linear-gradient(135deg,var(--sky-deep),var(--sky-dark),var(--rose-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{font-size:clamp(1.1rem,3vw,1.6rem);color:var(--rose-deep);font-style:italic;margin-bottom:4rem;opacity:0;animation:fadeIn 1s ease .9s forwards}
+.timer-grid{display:flex;gap:clamp(1rem,4vw,2.5rem);align-items:flex-start;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeIn 1s ease 1.2s forwards}
+.timer-block{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.timer-num{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,6rem);font-weight:700;line-height:1;background:linear-gradient(135deg,var(--sky-deep),var(--sky-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-width:clamp(80px,15vw,130px);text-align:center;position:relative}
+.timer-num::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:70%;height:2px;background:linear-gradient(90deg,transparent,var(--sky),transparent)}
+.timer-unit{font-size:.85rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);margin-top:.5rem}
+.timer-sep{font-size:clamp(2rem,6vw,4rem);color:var(--rose);line-height:1;margin-top:.3rem;animation:blink 1s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.timer-hint{margin-top:3rem;font-size:.9rem;color:var(--text-light);letter-spacing:.15em;font-style:italic;opacity:0;animation:fadeIn 1s ease 1.5s forwards}
+@keyframes fadeIn{to{opacity:1}}
+
+/* MAIN */
+#main-content{display:none;position:relative;z-index:1}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#c8eaf8 0%,#f0d8e8 50%,#b8dff5 100%);position:relative;overflow:hidden;text-align:center;padding:2rem}
+.hero-ornament{font-size:clamp(3rem,8vw,5rem);margin-bottom:1.5rem;animation:floatBounce 3s ease-in-out infinite}
+@keyframes floatBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,5.5rem);font-weight:700;background:linear-gradient(135deg,var(--sky-dark),var(--rose-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:1rem}
+.hero-age{font-family:'Playfair Display',serif;font-size:clamp(5rem,20vw,12rem);font-weight:700;color:rgba(91,163,201,.1);line-height:1;position:absolute;z-index:0;user-select:none}
+.hero-sub{font-size:clamp(1.1rem,3vw,1.5rem);font-style:italic;color:var(--sky-dark);font-weight:300;max-width:540px;line-height:1.8;position:relative;z-index:1}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-light);font-size:.8rem;letter-spacing:.15em}
+.scroll-arrow{width:24px;height:24px;border-right:2px solid var(--sky);border-bottom:2px solid var(--sky);transform:rotate(45deg);animation:scrollBounce 1.5s ease-in-out infinite}
+@keyframes scrollBounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+
+.divider{display:flex;align-items:center;gap:1.5rem;margin:1rem 0 2.5rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sky),transparent)}
+.divider-icon{color:var(--rose);font-size:1.2rem}
+.section-tag{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:1rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--sky-dark);margin-bottom:2rem;line-height:1.2}
+
+/* QUIZ */
+#game-section{background:linear-gradient(160deg,#f0f8fd 0%,#fdf0f5 100%);padding:clamp(3rem,8vw,6rem) clamp(1rem,4vw,2rem)}
+.game-wrapper{max-width:780px;margin:0 auto;text-align:center}
+.game-intro{font-size:clamp(.95rem,1.8vw,1.1rem);color:var(--text-light);font-style:italic;margin-bottom:2.5rem;line-height:1.9}
+.game-intro strong{color:var(--rose-deep)}
+.quiz-prog-wrap{display:flex;align-items:center;gap:12px;margin-bottom:2rem}
+.quiz-prog-track{flex:1;height:5px;background:rgba(91,163,201,.15);border-radius:10px;overflow:hidden}
+.quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--sky-deep),var(--rose-deep));border-radius:10px;width:0%;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.quiz-prog-label{font-size:.8rem;color:var(--text-light);white-space:nowrap;letter-spacing:.08em}
+.q-card{background:white;border-radius:22px;box-shadow:0 8px 40px rgba(91,163,201,.12),0 2px 8px rgba(0,0,0,.04);padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,4vw,2.5rem);margin-bottom:1.8rem;border:1.5px solid rgba(91,163,201,.12)}
+.q-number{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:.9rem}
+.q-text{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.8rem);color:var(--text);line-height:1.5;margin-bottom:1.8rem;font-weight:400}
+.q-input-wrap{display:flex;gap:10px;max-width:420px;margin:0 auto}
+.q-input{flex:1;padding:.85rem 1.3rem;border:2px solid rgba(91,163,201,.25);border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;background:var(--white)}
+.q-input:focus{border-color:var(--sky-deep);box-shadow:0 0 0 4px rgba(91,163,201,.1)}
+.q-input.err{border-color:var(--rose-deep);animation:shake .35s ease}
+.q-input.ok{border-color:var(--green);background:rgba(52,199,138,.04)}
+.q-submit{padding:.85rem 1.6rem;border:none;border-radius:50px;background:linear-gradient(135deg,var(--sky-deep),var(--sky-dark));color:white;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.08em;cursor:pointer;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.q-submit:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(91,163,201,.35)}
+.q-feedback{margin-top:1rem;min-height:1.4rem;font-size:.95rem;font-style:italic}
+.q-feedback.ok{color:var(--green)}.q-feedback.err{color:var(--rose-deep)}
+.q-hint-btn{background:none;border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:.85rem;font-style:italic;color:var(--text-light);letter-spacing:.08em;margin-top:.6rem;text-decoration:underline dotted;opacity:.7;transition:opacity .2s}
+.q-hint-btn:hover{opacity:1}
+.q-hint{font-size:.82rem;color:var(--text-light);font-style:italic;margin-top:.5rem;opacity:0;transition:opacity .3s}.q-hint.show{opacity:1}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.memory-reveal{margin-top:0;max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.34,1.2,.64,1),margin-top .4s}
+.memory-reveal.open{max-height:600px;margin-top:1.6rem}
+.memory-inner{border-radius:18px;overflow:hidden;box-shadow:0 12px 48px rgba(91,163,201,.18);position:relative;cursor:pointer}
+.memory-inner img,.memory-inner video{width:100%;max-height:460px;object-fit:cover;display:block;transition:transform .4s}
+.memory-inner:hover img,.memory-inner:hover video{transform:scale(1.02)}
+.memory-zoom{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.88);display:flex;align-items:center;justify-content:center;font-size:1rem;opacity:0;transition:opacity .2s;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.memory-inner:hover .memory-zoom{opacity:1}
+.unlock-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(52,199,138,.12),rgba(91,163,201,.1));border:1px solid rgba(52,199,138,.3);border-radius:50px;padding:.35rem 1rem;font-size:.8rem;color:var(--green);letter-spacing:.1em;margin-bottom:1rem;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+
+/* AFRICA */
+#africa-section{background:linear-gradient(160deg,#c8eaf8 0%,#f0d8e8 50%,#b8dff5 100%);padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden;display:none}
+#africa-section::before{content:'🌍';position:absolute;font-size:clamp(12rem,30vw,20rem);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;pointer-events:none;line-height:1}
+.africa-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}
+.africa-tag{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:1rem}
+.africa-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,var(--sky-dark),var(--rose-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:.8rem}
+.africa-subtitle{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--sky-dark);font-style:italic;margin-bottom:3rem;line-height:1.7;font-weight:300}
+.africa-video-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(91,163,201,.2),0 0 0 1px rgba(91,163,201,.12);background:var(--sky-light);aspect-ratio:16/9;max-width:720px;margin:0 auto}
+.africa-video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.africa-video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--text-light);font-style:italic;font-size:.95rem;z-index:1;padding:2rem;text-align:center}
+.africa-ph-icon{font-size:3rem;display:block;margin-bottom:.5rem}
+.africa-caption{margin-top:1.5rem;font-size:.85rem;color:var(--text-light);font-style:italic;letter-spacing:.12em}
+.africa-sep{display:flex;align-items:center;gap:1.5rem;margin:3rem 0}
+.africa-sep::before,.africa-sep::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sky),transparent)}
+.africa-sep span{color:var(--rose)}
+.green-btn{display:inline-block;padding:.95rem 3rem;border:none;border-radius:50px;background:linear-gradient(135deg,var(--sky-deep),var(--sky-dark));color:white;font-family:'Cormorant Garamond',serif;font-size:1.15rem;letter-spacing:.1em;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.green-btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(91,163,201,.4)}
+
+/* CONGRATS + POEM */
+#congrats-section{background:linear-gradient(160deg,#c8eaf8 0%,#f5dce8 60%,#b8dff5 100%);padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden;display:none}
+#congrats-section::before{content:'26';position:absolute;font-family:'Playfair Display',serif;font-size:clamp(15rem,40vw,25rem);font-weight:700;color:rgba(91,163,201,.07);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
+.congrats-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.congrats-from{font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:2rem}
+
+/* POEM */
+.poem-wrap{background:rgba(255,255,255,.62);backdrop-filter:blur(14px);border-radius:28px;padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,5vw,3rem);box-shadow:0 16px 60px rgba(91,163,201,.12),0 2px 8px rgba(0,0,0,.04);border:1px solid rgba(255,255,255,.8);margin-bottom:3rem;position:relative;overflow:hidden;text-align:left}
+.poem-wrap::before{content:'\275D';position:absolute;top:-10px;left:16px;font-size:8rem;color:rgba(91,163,201,.07);font-family:'Playfair Display',serif;line-height:1;pointer-events:none}
+.poem-wrap::after{content:'\275E';position:absolute;bottom:-42px;right:16px;font-size:8rem;color:rgba(232,130,154,.07);font-family:'Playfair Display',serif;line-height:1;pointer-events:none}
+.poem-body{font-family:'EB Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:2.1;color:var(--text);position:relative;z-index:1}
+.poem-stanza{margin-bottom:1.6em}
+.poem-line{display:block;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.poem-line.vis{opacity:1;transform:translateY(0)}
+.poem-ref{color:var(--rose-deep);font-style:italic;cursor:default;position:relative;white-space:nowrap}
+.poem-ref::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(45,110,142,.93);color:white;font-size:.65rem;padding:.3rem .75rem;border-radius:8px;white-space:nowrap;letter-spacing:.07em;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Cormorant Garamond',serif;font-style:normal}
+.poem-ref:hover::after{opacity:1}
+
+/* MINECRAFT */
+#minecraft-section{background:linear-gradient(160deg,#daeef9 0%,#f5e8f0 50%,#d6eef8 100%);padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden;display:none}
+#minecraft-section::before{content:'🎮';position:absolute;font-size:clamp(12rem,30vw,20rem);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.04;pointer-events:none;line-height:1}
+.mc-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.mc-tag{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:1rem}
+.mc-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--sky-dark);line-height:1.2;margin-bottom:2rem}
+.mc-story{background:rgba(255,255,255,.65);backdrop-filter:blur(14px);border-radius:24px;padding:clamp(1.8rem,4vw,3rem);box-shadow:0 16px 60px rgba(91,163,201,.12),0 2px 8px rgba(0,0,0,.04);border:1px solid rgba(255,255,255,.85);text-align:left;position:relative;overflow:hidden}
+.mc-story::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sky-deep),var(--rose-deep),var(--sky-deep))}
+.mc-story-text{font-family:'EB Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:2;color:var(--text)}
+.mc-story-text p{margin-bottom:1.3em}
+.mc-story-text p:last-child{margin-bottom:0}
+.mc-story-text code{background:rgba(91,163,201,.1);border:1px solid rgba(91,163,201,.22);border-radius:6px;padding:.12rem .55rem;font-family:monospace;font-size:.88em;color:var(--sky-dark);letter-spacing:.04em}
+.mc-story-text .mc-accent{color:var(--rose-deep);font-style:italic}
+.mc-sep{display:flex;align-items:center;gap:1.5rem;margin:2rem 0}
+.mc-sep::before,.mc-sep::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sky),transparent)}
+
+/* GALLERY */
+#gallery-section{background:linear-gradient(160deg,#fdf5f8 0%,#eef6fc 100%);padding:clamp(2.5rem,6vw,5rem) clamp(1rem,3vw,2rem)}
+.gallery-wrapper{max-width:1100px;margin:0 auto;text-align:center}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:1.5rem}
+.gal-item{border-radius:14px;overflow:hidden;aspect-ratio:1;cursor:pointer;position:relative;box-shadow:0 4px 18px rgba(91,163,201,.1);animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.gal-item img,.gal-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.gal-item:hover img,.gal-item:hover video{transform:scale(1.06)}
+.gal-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.15);font-size:2.5rem;opacity:0;transition:opacity .25s}
+.gal-item:hover .gal-play{opacity:1}
+
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(10,20,40,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center}
+#lightbox.open{display:flex}
+#lb-inner{position:relative;max-width:90vw;max-height:90vh;animation:lbZoom .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes lbZoom{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+#lb-img,#lb-vid{max-width:90vw;max-height:80vh;border-radius:16px;display:block;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+#lb-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:white;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:transform .2s;z-index:10}
+#lb-close:hover{transform:scale(1.15) rotate(90deg)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:white;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:all .2s;z-index:10}
+.lb-nav:hover{background:var(--rose-light);transform:translateY(-50%) scale(1.1)}
+#lb-prev{left:-52px}#lb-next{right:-52px}
+#lb-counter{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.8rem;white-space:nowrap}
+@media(max-width:600px){#lb-prev{left:4px;top:auto;bottom:-50px;transform:none}#lb-next{right:4px;top:auto;bottom:-50px;transform:none}.lb-nav:hover{transform:scale(1.1)}}
+
+/* NEXT BTN */
+.next-btn{display:block;margin:2.5rem auto 0;padding:.95rem 3rem;border:none;border-radius:50px;background:linear-gradient(135deg,var(--sky-deep),var(--sky-dark));color:white;font-family:'Cormorant Garamond',serif;font-size:1.15rem;letter-spacing:.1em;cursor:not-allowed;opacity:.3;transition:opacity .4s,transform .2s,box-shadow .2s}
+.next-btn.unlocked{cursor:pointer;opacity:1}
+.next-btn.unlocked:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(91,163,201,.4)}
+
+/* FINAL */
+#final-section{background:linear-gradient(160deg,#c8eaf8 0%,#f5dce8 60%,#b8dff5 100%);padding:clamp(4rem,10vw,7rem) clamp(1.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden;display:none}
+.final-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.final-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:var(--sky-dark);margin-bottom:1.5rem;line-height:1.3}
+.final-text{font-size:clamp(1rem,2vw,1.2rem);color:var(--text-light);font-style:italic;line-height:2;margin-bottom:2rem}
+.final-sign{font-style:italic;font-size:1.15rem;color:var(--rose-deep);letter-spacing:.1em}
+
+footer{text-align:center;padding:3rem 2rem;background:var(--sky-dark);color:rgba(255,255,255,.6);font-size:.85rem;letter-spacing:.15em;display:none}
+footer span{color:var(--rose-light)}
+
+/* AUDIO PLAYER */
+#audio-player{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:300px;background:rgba(255,240,246,.97);backdrop-filter:blur(24px);border-radius:22px;box-shadow:0 12px 50px rgba(232,130,154,.18),0 2px 8px rgba(0,0,0,.07);border:1px solid rgba(244,184,200,.55);overflow:hidden;font-family:'Cormorant Garamond',serif}
+#audio-player.minimized #player-body{display:none}
+#player-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;cursor:pointer;gap:10px;background:linear-gradient(90deg,rgba(244,184,200,.25),rgba(168,216,234,.15));border-bottom:1px solid rgba(244,184,200,.3)}
+#player-topbar-info{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+#player-mini-cover{width:36px;height:36px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--rose-deep),var(--sky-deep));background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;box-shadow:0 2px 8px rgba(232,130,154,.3)}
+.mini-track{flex:1;min-width:0}.mini-title{font-size:.85rem;color:var(--rose-deep);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-artist{font-size:.7rem;color:var(--text-light);font-style:italic}
+#toggle-player-btn{background:none;border:none;cursor:pointer;color:var(--rose-deep);flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+#player-body{padding:14px 14px 10px}
+#cover-wrap{width:100%;aspect-ratio:1;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,var(--rose-light),var(--sky-light));margin-bottom:13px;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(232,130,154,.2);background-size:cover;background-position:center}
+#cover-ph{font-size:4rem;color:rgba(232,130,154,.35)}
+#p-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);text-align:center;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#p-artist{font-style:italic;font-size:.78rem;color:var(--text-light);text-align:center;margin-bottom:13px}
+.prog-wrap{cursor:pointer;margin-bottom:4px;padding:4px 0}.prog-bg{height:3px;background:rgba(232,130,154,.18);border-radius:4px}.prog-fill{height:100%;background:linear-gradient(90deg,var(--rose-deep),var(--sky-deep));border-radius:4px;width:0%;transition:width .25s linear}.times{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-light);margin-top:4px}
+.controls{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px 0 8px}
+.cbtn{background:rgba(232,130,154,.1);border:none;cursor:pointer;color:var(--rose-deep);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .15s;flex-shrink:0}
+.cbtn svg{width:16px;height:16px;fill:currentColor}.cbtn:hover{background:rgba(232,130,154,.2);transform:scale(1.08)}
+.cbtn-sm{background:none;border:none;cursor:pointer;color:rgba(232,130,154,.4);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:color .18s,transform .15s;flex-shrink:0}
+.cbtn-sm svg{width:14px;height:14px;fill:currentColor}.cbtn-sm:hover{color:var(--rose-deep);transform:scale(1.1)}.cbtn-sm.active{color:var(--rose-deep)}
+#pp-btn{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose-deep),var(--sky-deep));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(232,130,154,.4);transition:transform .15s;flex-shrink:0}
+#pp-btn svg{width:20px;height:20px;fill:white}#pp-btn:hover{transform:scale(1.07)}
+.vol-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+#vol{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:rgba(232,130,154,.18);border-radius:4px;outline:none;cursor:pointer}
+#vol::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--rose-deep)}
+#pl-wrap{max-height:120px;overflow-y:auto;border-top:1px solid rgba(244,184,200,.4);padding-top:8px}
+.pl-item{display:flex;align-items:center;gap:9px;padding:5px 4px;border-radius:8px;cursor:pointer;transition:background .18s;font-size:.8rem}
+.pl-item:hover{background:rgba(244,184,200,.25)}.pl-item.active{background:rgba(244,184,200,.4)}
+.pl-n{width:16px;text-align:center;color:var(--text-light);font-size:.68rem;flex-shrink:0}.pl-item.active .pl-n{color:var(--rose-deep)}
+.pl-info{flex:1;min-width:0}.pl-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}.pl-item.active .pl-name{color:var(--rose-deep)}.pl-art{font-style:italic;font-size:.68rem;color:var(--text-light)}
+@media(max-width:480px){#audio-player{width:calc(100vw - 2rem);right:1rem;bottom:1rem}}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<!-- TIMER -->
+<section id="timer-section">
+  <div class="timer-bg-circle"></div>
+  <div class="timer-bg-circle"></div>
+  <h1 class="name-title">Анастасия</h1>
+  <p class="subtitle">✨ до особого момента осталось:</p>
+  <div class="timer-grid">
+    <div class="timer-block"><div class="timer-num" id="t-days">00</div><div class="timer-unit">дней</div></div>
+    <div class="timer-sep">·</div>
+    <div class="timer-block"><div class="timer-num" id="t-hours">00</div><div class="timer-unit">часов</div></div>
+    <div class="timer-sep">·</div>
+    <div class="timer-block"><div class="timer-num" id="t-min">00</div><div class="timer-unit">минут</div></div>
+    <div class="timer-sep">·</div>
+    <div class="timer-block"><div class="timer-num" id="t-sec">00</div><div class="timer-unit">секунд</div></div>
+  </div>
+  <p class="timer-hint">💙 Открывается 14 апреля в 00:00</p>
+</section>
+
+<!-- MAIN -->
+<div id="main-content">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-age">26</div>
+    <div class="hero-ornament">🌸</div>
+    <h1 class="hero-title">С днём<br>рождения,<br>Настя!</h1>
+    <p class="hero-sub">Сегодня — твой день. Один из самых особенных.<br>Наполненный светом, теплом и всем, чего ты заслуживаешь.</p>
+    <div class="scroll-hint"><span>листай вниз</span><div class="scroll-arrow"></div></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="game-section">
+    <div class="game-wrapper">
+      <p class="section-tag">✦ мини-игра ✦</p>
+      <h2 class="section-title">Ответь — открой воспоминание</h2>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <p class="game-intro">
+        (Извини за одно и тоже, только в другой обертке.)<br>
+        За каждый правильный ответ открывается одно воспоминание.<br>
+        <strong>Ответь на все — и откроется поздравление 🔒</strong>
+      </p>
+      <div class="quiz-prog-wrap">
+        <div class="quiz-prog-track"><div class="quiz-prog-fill" id="quizFill"></div></div>
+        <div class="quiz-prog-label" id="quizProgLabel">0 / 0</div>
+      </div>
+      <div id="questionsWrap"></div>
+      <button class="next-btn" id="nextBtn" onclick="showAfrica()">🔒 Открыть поздравление</button>
+    </div>
+  </section>
+
+  <!-- AFRICA VIDEO -->
+  <section id="africa-section">
+    <div class="africa-inner">
+      <p class="africa-tag">✦ привет из далека ✦</p>
+      <h2 class="africa-title">Поздравление от гламурных, шоколадных парней</h2><br>
+      <div class="africa-video-wrap" id="africaWrap">
+        <!-- Положи рядом с index.html файл: africa.mp4 -->
+        <video id="africaVid" controls playsinline>
+          <source src="africa.mp4" type="video/mp4">
+        </video>
+        <div class="africa-video-placeholder" id="africaPh" style="display:none">
+          <span class="africa-ph-icon">🎬</span>
+          Загрузи файл <strong style="color:var(--sky-deep)">africa.mp4</strong><br>рядом с index.html
+        </div>
+      </div>
+      <p class="africa-caption">не злись пожалуйста!</p>
+      <div class="africa-sep"><span>💙</span></div>
+      <button class="green-btn" onclick="showCongrats()">💙 Читать поздравление</button>
+    </div>
+  </section>
+
+  <!-- CONGRATS + POEM -->
+  <section id="congrats-section">
+    <div class="congrats-inner">
+      <p class="congrats-from">✦ оливье из слов ✦</p>
+      <h2 class="section-title" style="font-size:clamp(1.8rem,5vw,3rem)">С днём рождения!</h2>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <div class="poem-wrap">
+        <div class="poem-body" id="poemBody"></div>
+      </div>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <button class="next-btn unlocked" style="margin-top:0" onclick="showMinecraft()">🎮 Получить подарок</button>
+    </div>
+  </section>
+
+  <!-- MINECRAFT -->
+  <section id="minecraft-section">
+    <div class="mc-inner">
+      <p class="mc-tag">✦ твой подарок ✦</p>
+      <h2 class="mc-title">Подарок ждёт тебя в Minecraft 🎁</h2>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <div class="mc-story">
+        <div class="mc-story-text">
+          <p>Помнишь, мы играли в майнкрафт — там, где ты построила <span class="mc-accent">розовый пикми-домик</span>? Вот на этом самом сервере тебя ждёт подарок. Заходи скорее и посмотри на него 🎀</p>
+          <p>Версия майнкрафта — <code>1.21.4</code>, IP сервера — <code>217.145.72.82</code>.</p>
+          <p>Когда зайдёшь — иди от пикми-домика по <span class="mc-accent">дорожке из лепестков</span>. Если вдруг забыла, где домик, просто пропиши в чате:</p>
+          <p style="text-align:center"><code>/tp 801.464 121 -641.000</code></p>
+          <p>В конце дорожки тебя будет ждать кнопка на <span class="mc-accent">изумрудном блоке</span> — нажми на неё. Тебе в инвентарь упадёт книга, прочитай её содержимое, затем повернись в противоположную от изумрудного блока сторону 💙</p>
+        </div>
+      </div>
+      <div class="mc-sep"></div>
+      <button class="next-btn unlocked" onclick="showGallery()">📸 Все воспоминания</button>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery-section" style="display:none">
+    <div class="gallery-wrapper">
+      <p class="section-tag">✦ наши моменты ✦</p>
+      <h2 class="section-title">Все воспоминания</h2>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="lbOutside(event)">
+    <div id="lb-inner">
+      <button id="lb-close" onclick="closeLb()">✕</button>
+      <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
+      <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
+      <img id="lb-img" src="" alt="">
+      <video id="lb-vid" controls style="display:none"></video>
+      <div id="lb-counter"></div>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <section id="final-section">
+    <div class="final-inner">
+      <h2 class="final-title">Ты стала для меня<br>чем-то больше, чем роль…</h2>
+      <div class="divider"><span class="divider-icon">💙</span></div>
+      <p class="final-text">
+        Чем песни, чем строки, чем эта любовь.<br>
+        С днём рождения, Настя.<br>Я тебя люблю.
+      </p>
+      <p class="final-sign">— С любовью, только для тебя 💙</p>
+    </div>
+  </section>
+
+  <footer id="site-footer">Сделано с <span>💙</span> специально для Анастасии · 14 апреля 2026</footer>
+</div>
+
+<!-- AUDIO PLAYER -->
+<div id="audio-player" class="minimized">
+  <div id="player-topbar" onclick="togglePlayer()">
+    <div id="player-topbar-info">
+      <div id="player-mini-cover"></div>
+      <div class="mini-track">
+        <div class="mini-title" id="mini-title">Музыка</div>
+        <div class="mini-artist" id="mini-artist">нажми чтобы открыть</div>
+      </div>
+    </div>
+    <button id="toggle-player-btn">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+    </button>
+  </div>
+  <div id="player-body">
+    <div id="cover-wrap"><div id="cover-ph">♪</div></div>
+    <div id="p-title">— нет трека —</div>
+    <div id="p-artist"></div>
+    <div class="prog-wrap" onclick="seekAudio(event)">
+      <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="times"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div>
+    </div>
+    <div class="controls">
+      <button class="cbtn-sm" id="shuffle-btn" onclick="toggleShuffle()">
+        <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+      </button>
+      <button class="cbtn" onclick="prevTrack()">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+      <button id="pp-btn" onclick="togglePlay()">
+        <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="cbtn" onclick="nextTrack()">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+      </button>
+      <button class="cbtn-sm" id="repeat-btn" onclick="toggleRepeat()">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+      </button>
+    </div>
+    <div class="vol-row">
+      <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:rgba(232,130,154,.5)"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></span>
+      <input type="range" id="vol" min="0" max="1" step="0.01" value="0.15" oninput="setVol(this.value)">
+      <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:rgba(232,130,154,.5)"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+    </div>
+    <div id="pl-wrap"></div>
+  </div>
+</div>
+<audio id="aud"></audio>
+
+<script>
+// ══ НАСТРОЙКИ ══
+const BIRTHDAY = new Date('2026-04-14T00:00:00');
+// Тест (раскомментируй):
+// const BIRTHDAY = new Date('2025-01-01T00:00:00');
+
+const QUESTIONS = [
+  { q:'Куда Chizu Grave складывает вещи, когда она ссорится с Dazzle Grave?',                        answer:['в багажник', 'багажник', 'в машину', 'машину', 'в кар', 'кар', 'аватар', 'в аватар'], mediaType:'video' },
+  { q:'Сколько букв в слове «Анастасия»?',        answer:['9'],               hint:'Считай внимательно 🤭',            mediaUrl:'https://i.imgur.com/YLnw0d4.png',       mediaType:'image' },
+  { q:'Дата нашей роле плау свадьбы?',            answer:['20 сентября 2025','20 Сентября 2025','20 сентября, 2025','20 Сентября, 2025','20.09.2025','20.9.2025','20,09,2025','20,9,2025','20-09-2025','20-9-2025','20/09/2025','20/9/2025','2025-09-20'],hint:'🎲🎲🎲',mediaUrl:'https://i.imgur.com/4lgbXXj.png',mediaType:'image'},
+  { q:'Сколько дней в апреле?',                   answer:['30'],                                                       mediaUrl:'https://i.imgur.com/L11YAJw.png',       mediaType:'image' },
+  { q:'Мнение про ЕМСного Dazzle Grave?',         answer:['ЧСВ гандон', 'чсв гандон', 'ЧСВ уебок', 'чсв уебок', 'гандон', 'Гандон','уебок', 'уебок'], mediaUrl:'https://i.imgur.com/X1ekFIx.png',       mediaType:'image' },
+  { q:'Первый вместе просмотренный фильм?',       answer:['50 оттенков серого','50 оттенков'],     hint:'50...',      mediaUrl:'https://i.imgur.com/tWj9RrG.png',       mediaType:'image' },
+  { q:'Первый вместе просмотренный сериал?',      answer:['Лок и ключ', 'лок и ключ', 'Ключи локов', 'ключи локов'],  hint: '🔑🔑🔑',   mediaUrl:'https://i.imgur.com/Rn3FNp8.png',       mediaType:'image' },
+  { q:'Это нереально, я смотрю твой винрейт 30% даже *** посильней..',           answer:['бот', 'Бот', 'Bot', 'bot'],  mediaUrl:'https://i.imgur.com/lB5NABZ.jpeg',      mediaType:'image' },
+  { q:'Если в доту, то только дабл ***.',         answer:['мид', 'mid', 'Мид', 'Mid'],                                 mediaUrl:'https://i.imgur.com/mDbmJ3x.png',       mediaType:'image' },
+  { q:'Сколько секунд в минуте?',                 answer:['60'],                                                       mediaUrl:'https://i.imgur.com/Dl3yDI0.jpeg',      mediaType:'image' },
+  { q:'15 × 15 = ?',                              answer:['225'],                                                      mediaUrl:'https://i.imgur.com/mJUb8p4.png',       mediaType:'image' },
+  { q:'Сколько градусов в прямом угле?',          answer:['90'],                                                       mediaUrl:'https://i.imgur.com/NgKjsI2.png',       mediaType:'image' },
+  { q:'999 + 1 = ?',                              answer:['1000'],                                                     mediaUrl:'https://i.imgur.com/iNHRLMS.jpeg',      mediaType:'image' },
+  { q:'Сколько сторон у шестиугольника?',         answer:['6'],                                                        mediaUrl:'https://i.imgur.com/CQU5Jzj.jpeg',      mediaType:'image' },
+  { q:'(5 + 3) × 4 = ?',                          answer:['32'],                                                       mediaUrl:'https://i.imgur.com/yZfByp9.png',       mediaType:'image' },
+  { q:'Сколько нулей в числе миллион?',           answer:['6'],                                                        mediaUrl:'https://i.imgur.com/EF2Ze2E.png',       mediaType:'image' },
+  { q:'2¹⁰ = ?',                                  answer:['1024'],            hint:'2→4→8→16→32→64→128→256→512→... 🖥️', mediaUrl:'https://i.imgur.com/RHMPcAC.png',   mediaType:'image' },
+  { q:'Сколько углов у треугольника?',            answer:['3'],                                                        mediaUrl:'https://i.imgur.com/wm4mTzy.png',       mediaType:'image' },
+  { q:'50% от 200 = ?',                           answer:['100'],                                                      mediaUrl:'https://i.imgur.com/LTb3nJ6.jpeg',      mediaType:'image' },
+  { q:'123 + 321 = ?',                            answer:['444'],                                                      mediaUrl:'https://i.imgur.com/qAU2m7H.png',       mediaType:'image' },
+  { q:'Сколько минут в часе?',                    answer:['60'],                                                       mediaUrl:'https://i.imgur.com/QEjfhvK.png',       mediaType:'image' },
+  { q:'18 ÷ 3 + 4 × 2 = ?',                       answer:['14'],              hint:'Сначала × и ÷, потом + и − 🤓',    mediaUrl:'video2.mp4',                            mediaType:'video' },
+  { q:'Сколько цветов у радуги?',                 answer:['7'],                                                        mediaUrl:'video3.mp4',                            mediaType:'video' },
+  { q:'17 × 3 = ?',                               answer:['51'],                                                       mediaUrl:'video8.mp4',                            mediaType:'video' },
+  { q:'Сколько часов в сутках?',                  answer:['24'],                                                       mediaUrl:'video9.mp4',                            mediaType:'video' },
+  { q:'1000 − 137 = ?',                           answer:['863'],                                                      mediaUrl:'video10.mp4',                           mediaType:'video' },
+  { q:'(10 − 4)² = ?',                            answer:['36'],                                                       mediaUrl:'video11.mp4',                           mediaType:'video' },
+  { q:'Сколько граней у куба?',                   answer:['6'],                                                        mediaUrl:'video4.mp4',                            mediaType:'video' },
+  { q:'99 × 2 = ?',                               answer:['198'],                                                      mediaUrl:'video5.mp4',                            mediaType:'video' },
+  { q:'Сколько букв в русском алфавите?',         answer:['33'],                                                       mediaUrl:'video6.mp4',                            mediaType:'video' },
+  { q:'256 ÷ 8 = ?',                              answer:['32'],                                                       mediaUrl:'video7.mp4',                            mediaType:'video' },
+];
+
+const PLAYLIST = [
+  { title:'Симптом',           artist:'Keendy',                   src:'music0.mp3',  cover:'0.jpg'  },
+  { title:'Шёлк',              artist:'Ваня Дмитриенко',          src:'music.mp3',   cover:'1.jpg'  },
+  { title:'your love',         artist:'9mice',                    src:'music2.mp3',  cover:'2.jpg'  },
+  { title:'Настя',             artist:'Кишлак',                   src:'music3.mp3',  cover:'3.jpg'  },
+  { title:'вопреки',           artist:'тринадцать карат',         src:'music4.mp3',  cover:'4.jpg'  },
+  { title:'мне так нравится',  artist:'whited0lly.exe',           src:'music5.mp3',  cover:'5.jpg'  },
+  { title:'цветы',             artist:'тёмный принц',             src:'music6.mp3',  cover:'6.jpg'  },
+  { title:'ЗПСН',              artist:'Кишлак, Роки',             src:'music7.mp3',  cover:'7.jpg'  },
+  { title:'ты че обиделась',   artist:'Кmadk1d & тёмный принц',  src:'music8.mp3',  cover:'8.jpg'  },
+  { title:'Кинь мне крест',    artist:'Twinky',                   src:'music9.mp3',  cover:'9.jpg'  },
+  { title:'24/7',              artist:'FACE',                     src:'music10.mp3', cover:'10.jpg' },
+];
+
+// Стихотворение
+// text — строка | ref — название трека (для подсказки при наведении) | artist — исполнитель | stanza:true — новый абзац
+const POEM = [
+  { text:'я помню, как впервые —' },
+  { text:'«мне так нравится…»', ref:'мне так нравится', artist:'whited0lly.exe' },
+  { text:'и с этого момента всё внутри ломается' },
+  { text:'как будто случайно, но уже не уйти,' },
+  { text:'я потерялся в тебе, и не хочу найти' },
+
+  { text:'ты говоришь мало, но', stanza:true },
+  { text:'«ты че, обиделась?» —', ref:'ты че обиделась', artist:'Кmadk1d & тёмный принц' },
+  { text:'и снова тишина между нами повисла' },
+  { text:'мы будто играем в знакомый сюжет,' },
+  { text:'где «вопреки» всему — но счастливого нет', ref:'вопреки', artist:'тринадцать карат' },
+
+  { text:'ты как «симптом» — и я не лечусь,', ref:'Симптом', artist:'Keendy', stanza:true },
+  { text:'мне проще сгореть, чем сказать, что боюсь' },
+  { text:'и пусть это странно, и пусть не всерьёз,' },
+  { text:'но я к тебе ближе, чем к собственным снам и слёз' },
+
+  { text:'«твои губы как шёлк» — и я снова тону,', ref:'Шёлк', artist:'Ваня Дмитриенко', stanza:true },
+  { text:'в тебе слишком много того, что люблю' },
+  { text:'и пусть мы не идеальны, и мир против нас,' },
+  { text:'но я выбираю тебя каждый раз' },
+
+  { text:'ты как «your love» — от которой завис,', ref:'your love', artist:'9mice', stanza:true },
+  { text:'я вроде бы падал, но так и не вниз' },
+  { text:'и если вдруг ночью напишешь «вернись»,' },
+  { text:'я, может, промолчу… но внутри скажу «жизнь»' },
+
+  { text:'сегодня твой день — и среди всех слов', stanza:true },
+  { text:'я просто скажу без лишних основ:' },
+  { text:'ты стала для меня чем-то больше, чем роль…' },
+  { text:'чем песни, чем строки, чем эта любовь.', ref:null },
+];
+
+// ══ PARTICLES ══
+(()=>{
+  const w=document.getElementById('particles');
+  const c=['#a8d8ea','#d6eef8','#f4b8c8','#fce4ec','#5ba3c9','#ffffff'];
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');p.className='particle';
+    const s=Math.random()*10+4;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${c[Math.floor(Math.random()*c.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s`;
+    w.appendChild(p);
+  }
+})();
+
+// Africa stars
+(()=>{
+  // Check if africa video loads
+  const vid=document.getElementById('africaVid');
+  vid.addEventListener('error',()=>{ document.getElementById('africaPh').style.display='flex'; vid.style.display='none'; });
+})();
+
+// ══ TIMER ══
+function pad(n){return String(n).padStart(2,'0')}
+var timerDone=false;
+function tick(){
+  const diff=BIRTHDAY-new Date();
+  if(diff<=0&&!timerDone){
+    timerDone=true;
+    document.getElementById('timer-section').style.display='none';
+    document.getElementById('main-content').style.display='block';
+    initQuiz();launchConfetti();return;
+  }
+  if(timerDone)return;
+  document.getElementById('t-days').textContent=pad(Math.floor(diff/86400000));
+  document.getElementById('t-hours').textContent=pad(Math.floor((diff%86400000)/3600000));
+  document.getElementById('t-min').textContent=pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('t-sec').textContent=pad(Math.floor((diff%60000)/1000));
+}
+tick();setInterval(tick,1000);
+
+// ══ QUIZ ══
+var solvedCount=0,total=QUESTIONS.length,unlockedMedia=[];
+function initQuiz(){solvedCount=0;unlockedMedia=[];updateProgress();setNextBtn(false);buildQuestions();}
+function buildQuestions(){
+  const wrap=document.getElementById('questionsWrap');wrap.innerHTML='';
+  QUESTIONS.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='q-card';card.id='qcard-'+i;
+    card.innerHTML='<div class="q-number">Вопрос '+(i+1)+'</div><div class="q-text">'+q.q+'</div><div class="q-input-wrap"><input class="q-input" id="qinp-'+i+'" type="text" placeholder="Твой ответ..." autocomplete="off" spellcheck="false"><button class="q-submit" onclick="checkAnswer('+i+')">→</button></div><div class="q-feedback" id="qfb-'+i+'"></div>'+(q.hint?'<button class="q-hint-btn" id="qhbtn-'+i+'" onclick="showHint('+i+')">подсказка 🤫</button><div class="q-hint" id="qhint-'+i+'">'+q.hint+'</div>':'')+'<div class="memory-reveal" id="mem-'+i+'"></div>';
+    card.querySelector('#qinp-'+i).addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer(i);});
+    wrap.appendChild(card);
+  });
+}
+function checkAnswer(i){
+  const q=QUESTIONS[i],inp=document.getElementById('qinp-'+i),fb=document.getElementById('qfb-'+i);
+  if(inp.classList.contains('ok'))return;
+  const val=inp.value.trim().toLowerCase().replace(/\s+/g,'');
+  const ans=q.answer.map(a=>a.toLowerCase().replace(/\s+/g,''));
+  if(ans.includes(val)){
+    inp.classList.add('ok');inp.disabled=true;
+    fb.className='q-feedback ok';fb.textContent='✅ Правильно! Воспоминание открыто 💙';
+    solvedCount++;updateProgress();revealMemory(i,q);launchConfetti();
+    if(solvedCount===total){setNextBtn(true);document.getElementById('gallery-section').style.display='block';}
+  } else {
+    inp.classList.remove('err');void inp.offsetWidth;inp.classList.add('err');
+    fb.className='q-feedback err';fb.textContent='❌ Не то, попробуй ещё раз';
+    setTimeout(()=>inp.classList.remove('err'),400);
+  }
+}
+function showHint(i){const h=document.getElementById('qhint-'+i);if(h)h.classList.add('show');const b=document.getElementById('qhbtn-'+i);if(b)b.style.display='none';}
+function revealMemory(i,q){
+  const wrap=document.getElementById('mem-'+i);wrap.innerHTML='';
+  const badge=document.createElement('div');badge.className='unlock-badge';badge.textContent='🔓 Воспоминание открыто';
+  wrap.appendChild(badge);
+  const inner=document.createElement('div');inner.className='memory-inner';
+  const idx=unlockedMedia.length;unlockedMedia.push(q);
+  inner.innerHTML=(q.mediaType==='video'?'<video src="'+q.mediaUrl+'" autoplay muted loop playsinline></video>':'<img src="'+q.mediaUrl+'" loading="lazy" alt="">')+'<div class="memory-zoom">🔍</div>';
+  inner.addEventListener('click',()=>openLb(idx));
+  wrap.appendChild(inner);wrap.classList.add('open');
+  setTimeout(()=>document.getElementById('qcard-'+i).scrollIntoView({behavior:'smooth',block:'nearest'}),200);
+  addToGallery(q,idx);
+}
+function updateProgress(){document.getElementById('quizFill').style.width=(total?solvedCount/total*100:0)+'%';document.getElementById('quizProgLabel').textContent=solvedCount+' / '+total;}
+function setNextBtn(on){const b=document.getElementById('nextBtn');b.disabled=!on;b.classList.toggle('unlocked',on);b.textContent=on?'🎬 Открыть поздравление':'🔒 Открыть поздравление';}
+
+// ══ FLOW ══
+function showAfrica(){
+  if(!document.getElementById('nextBtn').classList.contains('unlocked'))return;
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('africa-section').style.display='block';
+  document.getElementById('africa-section').scrollIntoView({behavior:'smooth'});
+  launchConfetti();
+}
+function showCongrats(){
+  buildPoem();
+  document.getElementById('congrats-section').style.display='block';
+  document.getElementById('congrats-section').scrollIntoView({behavior:'smooth'});
+  launchConfetti();
+  setTimeout(animatePoem,500);
+}
+function showMinecraft(){
+  document.getElementById('minecraft-section').style.display='block';
+  document.getElementById('minecraft-section').scrollIntoView({behavior:'smooth'});
+  launchConfetti();
+}
+function showGallery(){
+  document.getElementById('gallery-section').style.display='block';
+  document.getElementById('final-section').style.display='block';
+  document.getElementById('site-footer').style.display='block';
+  document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'});
+  launchConfetti();
+}
+
+// ══ POEM ══
+function buildPoem(){
+  const body=document.getElementById('poemBody');
+  if(body.children.length>0)return;
+  let stanza=null;
+  POEM.forEach((ln,i)=>{
+    if(!stanza||ln.stanza){
+      stanza=document.createElement('div');stanza.className='poem-stanza';body.appendChild(stanza);
+    }
+    const span=document.createElement('span');span.className='poem-line';
+    if(ln.ref){
+      const txt=ln.text,ref=ln.ref,idx=txt.toLowerCase().indexOf(ref.toLowerCase());
+      if(idx>=0){
+        span.appendChild(document.createTextNode(txt.slice(0,idx)));
+        const r=document.createElement('span');r.className='poem-ref';r.textContent=txt.slice(idx,idx+ref.length);
+        r.setAttribute('data-tip','"'+ref+'" — '+ln.artist);span.appendChild(r);
+        span.appendChild(document.createTextNode(txt.slice(idx+ref.length)));
+      } else {span.textContent=txt;}
+    } else {span.textContent=ln.text;}
+    stanza.appendChild(span);
+  });
+}
+function animatePoem(){document.querySelectorAll('.poem-line').forEach((l,i)=>setTimeout(()=>l.classList.add('vis'),i*55));}
+
+// ══ GALLERY ══
+function addToGallery(q,idx){
+  const grid=document.getElementById('galleryGrid');
+  const item=document.createElement('div');item.className='gal-item';item.style.animationDelay=(idx*40)+'ms';
+  if(q.mediaType==='video'){
+    item.innerHTML='<video src="'+q.mediaUrl+'" muted loop playsinline></video><div class="gal-play">▶</div>';
+    const v=item.querySelector('video');item.addEventListener('mouseenter',()=>v.play());item.addEventListener('mouseleave',()=>v.pause());
+  } else {item.innerHTML='<img src="'+q.mediaUrl+'" loading="lazy" alt="">';}
+  item.addEventListener('click',()=>openLb(idx));grid.appendChild(item);
+}
+
+// ══ LIGHTBOX ══
+var lbIdx=0;
+function openLb(idx){lbIdx=idx;lbShow();document.getElementById('lightbox').classList.add('open');document.addEventListener('keydown',lbKey);}
+function closeLb(){document.getElementById('lightbox').classList.remove('open');const v=document.getElementById('lb-vid');v.pause();v.src='';document.removeEventListener('keydown',lbKey);}
+function lbShow(){
+  const p=unlockedMedia[lbIdx],img=document.getElementById('lb-img'),vid=document.getElementById('lb-vid');
+  if(p.mediaType==='video'){img.style.display='none';vid.style.display='block';vid.src=p.mediaUrl;vid.play();}
+  else{vid.style.display='none';vid.pause();vid.src='';img.style.display='block';img.src=p.mediaUrl;}
+  document.getElementById('lb-counter').textContent=(lbIdx+1)+' / '+unlockedMedia.length;
+}
+function lbNav(d){lbIdx=(lbIdx+d+unlockedMedia.length)%unlockedMedia.length;lbShow();}
+function lbOutside(e){if(e.target===document.getElementById('lightbox'))closeLb();}
+function lbKey(e){if(e.key==='ArrowRight')lbNav(1);else if(e.key==='ArrowLeft')lbNav(-1);else if(e.key==='Escape')closeLb();}
+
+// ══ AUDIO ══
+const aud=document.getElementById('aud');
+var curTrack=0,playing=false,repeatMode=false,shuffleMode=false;
+function buildPL(){
+  const w=document.getElementById('pl-wrap');w.innerHTML='';
+  PLAYLIST.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='pl-item'+(i===curTrack?' active':'');
+    d.innerHTML='<span class="pl-n">'+(i+1)+'</span><div class="pl-info"><div class="pl-name">'+t.title+'</div><div class="pl-art">'+t.artist+'</div></div>';
+    d.addEventListener('click',()=>loadTrack(i,true));w.appendChild(d);
+  });
+}
+function loadTrack(i,auto=false){
+  curTrack=i;const t=PLAYLIST[i];aud.src=t.src;aud.volume=parseFloat(document.getElementById('vol').value);
+  document.getElementById('p-title').textContent=t.title;document.getElementById('p-artist').textContent=t.artist;
+  document.getElementById('mini-title').textContent=t.title;document.getElementById('mini-artist').textContent=t.artist;
+  const cw=document.getElementById('cover-wrap'),ph=document.getElementById('cover-ph'),mc=document.getElementById('player-mini-cover');
+  if(t.cover){cw.style.backgroundImage="url('"+t.cover+"')";cw.style.backgroundSize='cover';cw.style.backgroundPosition='center';ph.style.display='none';mc.style.backgroundImage="url('"+t.cover+"')";mc.style.backgroundSize='cover';mc.style.backgroundPosition='center';mc.textContent='';}
+  else{cw.style.backgroundImage='';ph.style.display='flex';mc.style.backgroundImage='';mc.textContent='♪';}
+  document.querySelectorAll('.pl-item').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.getElementById('prog-fill').style.width='0%';document.getElementById('t-cur').textContent='0:00';
+  if(auto){aud.play().catch(()=>{});playing=true;updPP();}
+}
+function togglePlay(){if(playing){aud.pause();playing=false}else{aud.play().catch(()=>{});playing=true}updPP();}
+function updPP(){document.getElementById('icon-play').style.display=playing?'none':'block';document.getElementById('icon-pause').style.display=playing?'block':'none';}
+function prevTrack(){loadTrack((curTrack-1+PLAYLIST.length)%PLAYLIST.length,true)}
+function nextTrack(){
+  if(repeatMode){aud.currentTime=0;aud.play().catch(()=>{});return;}
+  if(shuffleMode){let n=Math.floor(Math.random()*PLAYLIST.length);if(PLAYLIST.length>1)while(n===curTrack)n=Math.floor(Math.random()*PLAYLIST.length);loadTrack(n,true);}
+  else loadTrack((curTrack+1)%PLAYLIST.length,true);
+}
+function toggleRepeat(){repeatMode=!repeatMode;document.getElementById('repeat-btn').classList.toggle('active',repeatMode)}
+function toggleShuffle(){shuffleMode=!shuffleMode;document.getElementById('shuffle-btn').classList.toggle('active',shuffleMode)}
+function setVol(v){aud.volume=parseFloat(v)}
+function seekAudio(e){const r=document.querySelector('.prog-bg').getBoundingClientRect(),f=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));if(aud.duration)aud.currentTime=f*aud.duration;}
+function fmtT(s){return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
+aud.addEventListener('timeupdate',()=>{if(!aud.duration)return;document.getElementById('prog-fill').style.width=(aud.currentTime/aud.duration*100)+'%';document.getElementById('t-cur').textContent=fmtT(aud.currentTime);});
+aud.addEventListener('loadedmetadata',()=>document.getElementById('t-dur').textContent=fmtT(aud.duration));
+aud.addEventListener('ended',nextTrack);
+aud.addEventListener('play',()=>{playing=true;updPP()});
+aud.addEventListener('pause',()=>{playing=false;updPP()});
+function togglePlayer(){const p=document.getElementById('audio-player');p.classList.toggle('minimized');document.getElementById('toggle-player-btn').querySelector('svg').style.transform=p.classList.contains('minimized')?'':'rotate(180deg)';}
+buildPL();if(PLAYLIST.length>0)loadTrack(0,false);
+aud.volume=0.15;document.getElementById('vol').value=0.15;
+aud.play().then(()=>{playing=true;updPP();}).catch(()=>{});
+function autoStart(){aud.play().then(()=>{playing=true;updPP();}).catch(()=>{});document.removeEventListener('click',autoStart);document.removeEventListener('touchstart',autoStart);}
+document.addEventListener('click',autoStart);document.addEventListener('touchstart',autoStart);
+
+// ══ CONFETTI ══
+function launchConfetti(){
+  const cols=['#a8d8ea','#f4b8c8','#5ba3c9','#e8829a','#ffffff','#fce4ec'];
+  const c=document.createElement('div');c.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden';document.body.appendChild(c);
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div'),s=Math.random()*10+5;
+    el.style.cssText='position:absolute;width:'+s+'px;height:'+s+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';border-radius:'+(Math.random()>.5?'50%':'2px')+';left:'+Math.random()*100+'%;top:-20px';
+    c.appendChild(el);
+    el.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:'translateY('+(window.innerHeight+50)+'px) rotate('+(Math.random()*720-360)+'deg)',opacity:0}],
+      {duration:Math.random()*2000+1200,delay:Math.random()*600,easing:'cubic-bezier(.25,.46,.45,.94)'}).onfinish=()=>el.remove();
+  }
+  setTimeout(()=>c.remove(),5000);
+}
+</script>
+</body>
+</html>
