@@ -420,38 +420,194 @@ const BIRTHDAY = new Date('2026-04-14T00:00:00');
 // const BIRTHDAY = new Date('2025-01-01T00:00:00');
 
 const QUESTIONS = [
-  { q:'Куда Chizu Grave складывает вещи, когда она ссорится с Dazzle Grave?',                        answer:['в багажник', 'багажник', 'в машину', 'машину', 'в кар', 'кар', 'аватар', 'в аватар'], mediaType:'video' },
-  { q:'Сколько букв в слове «Анастасия»?',        answer:['9'],               hint:'Считай внимательно 🤭',            mediaUrl:'https://i.imgur.com/YLnw0d4.png',       mediaType:'image' },
-  { q:'Дата нашей роле плау свадьбы?',            answer:['20 сентября 2025','20 Сентября 2025','20 сентября, 2025','20 Сентября, 2025','20.09.2025','20.9.2025','20,09,2025','20,9,2025','20-09-2025','20-9-2025','20/09/2025','20/9/2025','2025-09-20'],hint:'🎲🎲🎲',mediaUrl:'https://i.imgur.com/4lgbXXj.png',mediaType:'image'},
-  { q:'Сколько дней в апреле?',                   answer:['30'],                                                       mediaUrl:'https://i.imgur.com/L11YAJw.png',       mediaType:'image' },
-  { q:'Мнение про ЕМСного Dazzle Grave?',         answer:['ЧСВ гандон', 'чсв гандон', 'ЧСВ уебок', 'чсв уебок', 'гандон', 'Гандон','уебок', 'уебок'], mediaUrl:'https://i.imgur.com/X1ekFIx.png',       mediaType:'image' },
-  { q:'Первый вместе просмотренный фильм?',       answer:['50 оттенков серого','50 оттенков'],     hint:'50...',      mediaUrl:'https://i.imgur.com/tWj9RrG.png',       mediaType:'image' },
-  { q:'Первый вместе просмотренный сериал?',      answer:['Лок и ключ', 'лок и ключ', 'Ключи локов', 'ключи локов'],  hint: '🔑🔑🔑',   mediaUrl:'https://i.imgur.com/Rn3FNp8.png',       mediaType:'image' },
-  { q:'Это нереально, я смотрю твой винрейт 30% даже *** посильней..',           answer:['бот', 'Бот', 'Bot', 'bot'],  mediaUrl:'https://i.imgur.com/lB5NABZ.jpeg',      mediaType:'image' },
-  { q:'Если в доту, то только дабл ***.',         answer:['мид', 'mid', 'Мид', 'Mid'],                                 mediaUrl:'https://i.imgur.com/mDbmJ3x.png',       mediaType:'image' },
-  { q:'Сколько секунд в минуте?',                 answer:['60'],                                                       mediaUrl:'https://i.imgur.com/Dl3yDI0.jpeg',      mediaType:'image' },
-  { q:'15 × 15 = ?',                              answer:['225'],                                                      mediaUrl:'https://i.imgur.com/mJUb8p4.png',       mediaType:'image' },
-  { q:'Сколько градусов в прямом угле?',          answer:['90'],                                                       mediaUrl:'https://i.imgur.com/NgKjsI2.png',       mediaType:'image' },
-  { q:'999 + 1 = ?',                              answer:['1000'],                                                     mediaUrl:'https://i.imgur.com/iNHRLMS.jpeg',      mediaType:'image' },
-  { q:'Сколько сторон у шестиугольника?',         answer:['6'],                                                        mediaUrl:'https://i.imgur.com/CQU5Jzj.jpeg',      mediaType:'image' },
-  { q:'(5 + 3) × 4 = ?',                          answer:['32'],                                                       mediaUrl:'https://i.imgur.com/yZfByp9.png',       mediaType:'image' },
-  { q:'Сколько нулей в числе миллион?',           answer:['6'],                                                        mediaUrl:'https://i.imgur.com/EF2Ze2E.png',       mediaType:'image' },
-  { q:'2¹⁰ = ?',                                  answer:['1024'],            hint:'2→4→8→16→32→64→128→256→512→... 🖥️', mediaUrl:'https://i.imgur.com/RHMPcAC.png',   mediaType:'image' },
-  { q:'Сколько углов у треугольника?',            answer:['3'],                                                        mediaUrl:'https://i.imgur.com/wm4mTzy.png',       mediaType:'image' },
-  { q:'50% от 200 = ?',                           answer:['100'],                                                      mediaUrl:'https://i.imgur.com/LTb3nJ6.jpeg',      mediaType:'image' },
-  { q:'123 + 321 = ?',                            answer:['444'],                                                      mediaUrl:'https://i.imgur.com/qAU2m7H.png',       mediaType:'image' },
-  { q:'Сколько минут в часе?',                    answer:['60'],                                                       mediaUrl:'https://i.imgur.com/QEjfhvK.png',       mediaType:'image' },
-  { q:'18 ÷ 3 + 4 × 2 = ?',                       answer:['14'],              hint:'Сначала × и ÷, потом + и − 🤓',    mediaUrl:'video2.mp4',                            mediaType:'video' },
-  { q:'Сколько цветов у радуги?',                 answer:['7'],                                                        mediaUrl:'video3.mp4',                            mediaType:'video' },
-  { q:'17 × 3 = ?',                               answer:['51'],                                                       mediaUrl:'video8.mp4',                            mediaType:'video' },
-  { q:'Сколько часов в сутках?',                  answer:['24'],                                                       mediaUrl:'video9.mp4',                            mediaType:'video' },
-  { q:'1000 − 137 = ?',                           answer:['863'],                                                      mediaUrl:'video10.mp4',                           mediaType:'video' },
-  { q:'(10 − 4)² = ?',                            answer:['36'],                                                       mediaUrl:'video11.mp4',                           mediaType:'video' },
-  { q:'Сколько граней у куба?',                   answer:['6'],                                                        mediaUrl:'video4.mp4',                            mediaType:'video' },
-  { q:'99 × 2 = ?',                               answer:['198'],                                                      mediaUrl:'video5.mp4',                            mediaType:'video' },
-  { q:'Сколько букв в русском алфавите?',         answer:['33'],                                                       mediaUrl:'video6.mp4',                            mediaType:'video' },
-  { q:'256 ÷ 8 = ?',                              answer:['32'],                                                       mediaUrl:'video7.mp4',                            mediaType:'video' },
+  {
+    q: 'Куда Chizu Grave складывает вещи, когда она ссорится с Dazzle Grave?',
+    answer: ['в багажник', 'багажник', 'в машину', 'машину', 'кар', 'аватар', 'машина'],
+    hint: 'easy lvl, думай.',
+    media: { type: 'video', url: null }
+  },
+  {
+    q: 'Сколько букв в слове «Анастасия»?',
+    answer: ['9'],
+    hint: 'Считай внимательно 🤭',
+    media: { type: 'image', url: 'https://i.imgur.com/YLnw0d4.png' }
+  },
+  {
+    q: 'Дата нашей роле плау свадьбы?',
+    answer: ['20 сентября 2025','20 сентября, 2025', '20.09.2025','20.9.2025','20,09,2025','20,9,2025','20-09-2025','20-9-2025','20/09/2025','20/9/2025','2025-09-20'],
+    hint: '🔎💬🎲 | д./м./г.',
+    media: { type: 'image', url: 'https://i.imgur.com/4lgbXXj.png' }
+  },
+  {
+    q: 'Сколько дней в апреле?',
+    answer: ['30'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/L11YAJw.png' }
+  },
+  {
+    q: 'Мнение про ЕМСного Dazzle Grave?',
+    answer: ['чсв гандон', 'чсв уебок', 'гандон', 'уебок'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/X1ekFIx.png' }
+  },
+  {
+    q: 'Первый вместе просмотренный фильм?',
+    answer: ['50 оттенков серого', '50 оттенков'],
+    hint: '50...',
+    media: { type: 'image', url: 'https://i.imgur.com/tWj9RrG.png' }
+  },
+  {
+    q: 'Первый вместе просмотренный сериал?',
+    answer: ['лок и ключ', 'ключи локов', 'лок и ключи', 'ключи и лок', 'ключи и локи'],
+    hint: '🔑🔑🔑',
+    media: { type: 'image', url: 'https://i.imgur.com/Rn3FNp8.png' }
+  },
+  {
+    q: 'Это нереально, я смотрю твой винрейт 30% даже *** посильней..',
+    answer: ['бот', 'bot'],
+    hint: '***',
+    media: { type: 'image', url: 'https://i.imgur.com/lB5NABZ.jpeg' }
+  },
+  {
+    q: 'Если в доту, то только дабл ***.',
+    answer: ['мид', 'mid'],
+    hint: '***',
+    media: { type: 'image', url: 'https://i.imgur.com/mDbmJ3x.png' }
+  },
+  {
+    q: 'Сколько секунд в минуте?',
+    answer: ['60'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/Dl3yDI0.jpeg' }
+  },
+  {
+    q: 'cuff + gorilla dance, локация?',
+    answer: ['мусорка', 'на мусорке', 'у мусорки'],
+    hint: 'где-то возле визл снюс..👮‍♂️',
+    media: { type: 'image', url: 'https://i.imgur.com/mJUb8p4.png' }
+  },
+  {
+    q: 'cocco ********',
+    answer: ['shrapnel'],
+    hint: 'англ. буквами',
+    media: { type: 'image', url: 'https://i.imgur.com/NgKjsI2.png' }
+  },
+  {
+    q: '999 + 1 = ?',
+    answer: ['1000'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/iNHRLMS.jpeg' }
+  },
+  {
+    q: 'Сколько сторон у шестиугольника?',
+    answer: ['6'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/CQU5Jzj.jpeg' }
+  },
+  {
+    q: '(5 + 3) × 4 = ?',
+    answer: ['32'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/yZfByp9.png' }
+  },
+  {
+    q: 'Сколько нулей в числе миллион?',
+    answer: ['6'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/EF2Ze2E.png' }
+  },
+  {
+    q: '2¹⁰ = ?',
+    answer: ['1024'],
+    hint: '2→4→8→16→32→64→128→256→512→... 🖥️',
+    media: { type: 'image', url: 'https://i.imgur.com/RHMPcAC.png' }
+  },
+  {
+    q: 'Сколько углов у треугольника?',
+    answer: ['3'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/wm4mTzy.png' }
+  },
+  {
+    q: '50% от 200 = ?',
+    answer: ['100'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/LTb3nJ6.jpeg' }
+  },
+  {
+    q: '123 + 321 = ?',
+    answer: ['444'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/qAU2m7H.png' }
+  },
+  {
+    q: 'Сколько минут в часе?',
+    answer: ['60'],
+    hint: null,
+    media: { type: 'image', url: 'https://i.imgur.com/QEjfhvK.png' }
+  },
+  {
+    q: '18 ÷ 3 + 4 × 2 = ?',
+    answer: ['14'],
+    hint: 'Сначала × и ÷, потом + и − 🤓',
+    media: { type: 'video', url: 'video2.mp4' }
+  },
+  {
+    q: 'Сколько цветов у радуги?',
+    answer: ['7'],
+    hint: null,
+    media: { type: 'video', url: 'video3.mp4' }
+  },
+  {
+    q: '17 × 3 = ?',
+    answer: ['51'],
+    hint: null,
+    media: { type: 'video', url: 'video8.mp4' }
+  },
+  {
+    q: 'Сколько часов в сутках?',
+    answer: ['24'],
+    hint: null,
+    media: { type: 'video', url: 'video9.mp4' }
+  },
+  {
+    q: '1000 − 137 = ?',
+    answer: ['863'],
+    hint: null,
+    media: { type: 'video', url: 'video10.mp4' }
+  },
+  {
+    q: '(10 − 4)² = ?',
+    answer: ['36'],
+    hint: null,
+    media: { type: 'video', url: 'video11.mp4' }
+  },
+  {
+    q: 'Сколько граней у куба?',
+    answer: ['6'],
+    hint: null,
+    media: { type: 'video', url: 'video4.mp4' }
+  },
+  {
+    q: '99 × 2 = ?',
+    answer: ['198'],
+    hint: null,
+    media: { type: 'video', url: 'video5.mp4' }
+  },
+  {
+    q: 'Сколько букв в русском алфавите?',
+    answer: ['33'],
+    hint: null,
+    media: { type: 'video', url: 'video6.mp4' }
+  },
+  {
+    q: '256 ÷ 8 = ?',
+    answer: ['32'],
+    hint: null,
+    media: { type: 'video', url: 'video7.mp4' }
+  }
 ];
+
 
 const PLAYLIST = [
   { title:'Симптом',           artist:'Keendy',                   src:'music0.mp3',  cover:'0.jpg'  },
