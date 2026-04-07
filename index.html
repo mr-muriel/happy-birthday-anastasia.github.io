@@ -424,7 +424,7 @@ const QUESTIONS = [
     q: 'Куда Chizu Grave складывает вещи, когда она ссорится с Dazzle Grave?',
     answer: ['в багажник', 'багажник', 'в машину', 'машину', 'кар', 'аватар', 'машина'],
     hint: 'easy lvl, думай.',
-    media: { type: 'video', url: null }
+    media: { type: 'video', url: 'video1.mp4' }
   },
   {
     q: 'Сколько букв в слове «Анастасия»?',
@@ -488,8 +488,8 @@ const QUESTIONS = [
   },
   {
     q: 'cocco ********',
-    answer: ['shrapnel'],
-    hint: 'англ. буквами',
+    answer: ['shrapnel', 'шрапнель'],
+    hint: null,
     media: { type: 'image', url: 'https://i.imgur.com/NgKjsI2.png' }
   },
   {
@@ -571,15 +571,15 @@ const QUESTIONS = [
     media: { type: 'video', url: 'video9.mp4' }
   },
   {
-    q: '1000 − 137 = ?',
-    answer: ['863'],
+    q: '1000 − 7 = ?',
+    answer: ['993'],
     hint: null,
     media: { type: 'video', url: 'video10.mp4' }
   },
   {
-    q: '(10 − 4)² = ?',
-    answer: ['36'],
-    hint: null,
+    q: '******* не виноват!',
+    answer: ['шоколад'],
+    hint: 'пропущенное слово?',
     media: { type: 'video', url: 'video12.mp4' }
   },
   {
@@ -589,9 +589,9 @@ const QUESTIONS = [
     media: { type: 'video', url: 'video4.mp4' }
   },
   {
-    q: '99 × 2 = ?',
+    q: '********** в моем любимом баре на половину...',
     answer: ['198'],
-    hint: null,
+    hint: 'пропущенное слово?',
     media: { type: 'video', url: 'video5.mp4' }
   },
   {
@@ -601,16 +601,22 @@ const QUESTIONS = [
     media: { type: 'video', url: 'video6.mp4' }
   },
   {
-    q: '256 ÷ 8 = ?',
-    answer: ['32'],
+    q: '2 + 2 х 2?',
+    answer: ['6'],
     hint: null,
     media: { type: 'video', url: 'video7.mp4' }
   },
   {
-    q: '256 ÷ 8 = ?',
-    answer: ['32'],
-    hint: null,
+    q: '*****, *****. Дай мне руку, чтобы не упасть мне...',
+    answer: ['Настя, Настя', 'Настя Настя', 'Настя'],
+    hint: 'пропущенное слово?',
     media: { type: 'video', url: 'video11.mp4' }
+  },
+  {
+    q: 'плакали плакали батареи и *****',
+    answer: ['трубы'],
+    hint: 'пропущенное слово?',
+    media: { type: 'image', url: 'https://i.imgur.com/qtJZriN.png' }
   }
 ];
 
@@ -734,17 +740,23 @@ function checkAnswer(i){
   }
 }
 function showHint(i){const h=document.getElementById('qhint-'+i);if(h)h.classList.add('show');const b=document.getElementById('qhbtn-'+i);if(b)b.style.display='none';}
-function revealMemory(i,q){
-  const wrap=document.getElementById('mem-'+i);wrap.innerHTML='';
-  const badge=document.createElement('div');badge.className='unlock-badge';badge.textContent='🔓 Воспоминание открыто';
+function revealMemory(i, q) {
+  const wrap = document.getElementById('mem-' + i); wrap.innerHTML = '';
+  const badge = document.createElement('div'); badge.className = 'unlock-badge'; badge.textContent = '🔓 Воспоминание открыто';
   wrap.appendChild(badge);
-  const inner=document.createElement('div');inner.className='memory-inner';
-  const idx=unlockedMedia.length;unlockedMedia.push(q);
-  inner.innerHTML=(q.mediaType==='video'?'<video src="'+q.mediaUrl+'" autoplay muted loop playsinline></video>':'<img src="'+q.mediaUrl+'" loading="lazy" alt="">')+'<div class="memory-zoom">🔍</div>';
-  inner.addEventListener('click',()=>openLb(idx));
-  wrap.appendChild(inner);wrap.classList.add('open');
-  setTimeout(()=>document.getElementById('qcard-'+i).scrollIntoView({behavior:'smooth',block:'nearest'}),200);
-  addToGallery(q,idx);
+  const inner = document.createElement('div'); inner.className = 'memory-inner';
+  const idx = unlockedMedia.length; unlockedMedia.push(q);
+
+  // ← было q.mediaType / q.mediaUrl, должно быть q.media.type / q.media.url
+  inner.innerHTML = (q.media.type === 'video'
+    ? '<video src="' + q.media.url + '" autoplay muted loop playsinline></video>'
+    : '<img src="' + q.media.url + '" loading="lazy" alt="">') +
+    '<div class="memory-zoom">🔍</div>';
+
+  inner.addEventListener('click', () => openLb(idx));
+  wrap.appendChild(inner); wrap.classList.add('open');
+  setTimeout(() => document.getElementById('qcard-' + i).scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 200);
+  addToGallery(q, idx);
 }
 function updateProgress(){document.getElementById('quizFill').style.width=(total?solvedCount/total*100:0)+'%';document.getElementById('quizProgLabel').textContent=solvedCount+' / '+total;}
 function setNextBtn(on){const b=document.getElementById('nextBtn');b.disabled=!on;b.classList.toggle('unlocked',on);b.textContent=on?'🎬 Открыть поздравление':'🔒 Открыть поздравление';}
@@ -802,25 +814,59 @@ function buildPoem(){
 function animatePoem(){document.querySelectorAll('.poem-line').forEach((l,i)=>setTimeout(()=>l.classList.add('vis'),i*55));}
 
 // ══ GALLERY ══
-function addToGallery(q,idx){
-  const grid=document.getElementById('galleryGrid');
-  const item=document.createElement('div');item.className='gal-item';item.style.animationDelay=(idx*40)+'ms';
-  if(q.mediaType==='video'){
-    item.innerHTML='<video src="'+q.mediaUrl+'" muted loop playsinline></video><div class="gal-play">▶</div>';
-    const v=item.querySelector('video');item.addEventListener('mouseenter',()=>v.play());item.addEventListener('mouseleave',()=>v.pause());
-  } else {item.innerHTML='<img src="'+q.mediaUrl+'" loading="lazy" alt="">';}
-  item.addEventListener('click',()=>openLb(idx));grid.appendChild(item);
+function addToGallery(q, idx) {
+  const grid = document.getElementById('galleryGrid');
+  const item = document.createElement('div'); item.className = 'gal-item'; item.style.animationDelay = (idx * 40) + 'ms';
+
+  // ← q.media.type / q.media.url вместо q.mediaType / q.mediaUrl
+  if (q.media.type === 'video') {
+    item.innerHTML = '<video src="' + q.media.url + '" muted loop playsinline></video><div class="gal-play">▶</div>';
+    const v = item.querySelector('video'); item.addEventListener('mouseenter', () => v.play()); item.addEventListener('mouseleave', () => v.pause());
+  } else {
+    item.innerHTML = '<img src="' + q.media.url + '" loading="lazy" alt="">';
+  }
+  item.addEventListener('click', () => openLb(idx)); grid.appendChild(item);
 }
 
 // ══ LIGHTBOX ══
 var lbIdx=0;
 function openLb(idx){lbIdx=idx;lbShow();document.getElementById('lightbox').classList.add('open');document.addEventListener('keydown',lbKey);}
 function closeLb(){document.getElementById('lightbox').classList.remove('open');const v=document.getElementById('lb-vid');v.pause();v.src='';document.removeEventListener('keydown',lbKey);}
-function lbShow(){
-  const p=unlockedMedia[lbIdx],img=document.getElementById('lb-img'),vid=document.getElementById('lb-vid');
-  if(p.mediaType==='video'){img.style.display='none';vid.style.display='block';vid.src=p.mediaUrl;vid.play();}
-  else{vid.style.display='none';vid.pause();vid.src='';img.style.display='block';img.src=p.mediaUrl;}
-  document.getElementById('lb-counter').textContent=(lbIdx+1)+' / '+unlockedMedia.length;
+function lbShow() {
+  const prevImg = document.getElementById('lb-img');
+  prevImg.style.transform = 'scale(1)';
+  prevImg._zoomed = false;
+  prevImg.onclick = null;
+  const p = unlockedMedia[lbIdx], img = document.getElementById('lb-img'), vid = document.getElementById('lb-vid');
+
+  // ← p.media.type / p.media.url
+  if (p.media.type === 'video') {
+    img.style.display = 'none'; vid.style.display = 'block'; vid.src = p.media.url; vid.play();
+  } else {
+    vid.style.display = 'none'; vid.pause(); vid.src = '';
+    img.style.display = 'block'; img.src = p.media.url;
+    img.style.transition = 'transform .25s ease';
+    img.style.transformOrigin = '50% 50%';
+    img.style.transform = 'scale(1)';
+    img.style.cursor = 'zoom-in';
+    img._zoomed = false;
+  
+    img.onclick = (e) => {
+      const r = img.getBoundingClientRect();
+      const ox = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+      const oy = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+      img._zoomed = !img._zoomed;
+      if (img._zoomed) {
+        img.style.transformOrigin = ox + '% ' + oy + '%';
+        img.style.transform = 'scale(2.5)';
+        img.style.cursor = 'zoom-out';
+      } else {
+        img.style.transform = 'scale(1)';
+        img.style.cursor = 'zoom-in';
+      }
+    };
+  }
+  document.getElementById('lb-counter').textContent = (lbIdx + 1) + ' / ' + unlockedMedia.length;
 }
 function lbNav(d){lbIdx=(lbIdx+d+unlockedMedia.length)%unlockedMedia.length;lbShow();}
 function lbOutside(e){if(e.target===document.getElementById('lightbox'))closeLb();}
